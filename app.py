@@ -54,11 +54,14 @@ app.css.append_css({
               [Input('divisions-dropdown', 'value'), Input('teams-dropdown', 'value')])
 def update_graph(division, team):
     title = "Player Statistics - {} - {}".format(team, division)
-    team_players = players[(players.TeamName == team) & (players.Division == division)]
+    team_players = players[
+        (players.TeamName == team) & (players.Division == division)
+    ]
+    player_names = team_players.FirstName + ' ' + team_players.LastName
     fig = {"data": [
         {
             "values": team_players.Goals,
-            "labels": team_players.FirstName,
+            "labels": player_names,
             "domain": {"x": [0, 0.48]},
             "name": "Goals",
             "textposition":"inside",
@@ -69,7 +72,7 @@ def update_graph(division, team):
         },
         {
             "values": team_players.Assists,
-            "labels": team_players.FirstName,
+            "labels": player_names,
             "domain": {"x": [0.52, 1]},
             "name": "Assists",
             "hoverinfo":"label+value+name+percent",
