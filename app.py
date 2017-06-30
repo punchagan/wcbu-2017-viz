@@ -11,6 +11,7 @@ server = flask.Flask('app')
 server.secret_key = os.environ.get('secret_key', 'secret')
 
 app = dash.Dash('app', server=server)
+app.title = 'WCBU 2017 Statistics'
 
 app.scripts.config.serve_locally = False
 dcc._js_dist[0]['external_url'] = 'https://cdn.plot.ly/plotly-basic-latest.min.js'
